@@ -1,0 +1,2 @@
+(http[s]?:\/\/)?((www\.)?youtube\.com\/watch\?v=(?:[a-zA-Z]|[0-9]){11}?)+
+(http[s]?:\/\/)?((www\.)?mp3\.zing\.vn\/bai-hat\/(?:[a-zA-Z]|[0-9]|[\-])?\/?(?:[a-zA-Z]|[0-9])?(\.)?(html)?)+
