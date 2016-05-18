@@ -26,7 +26,7 @@ class Parser(HTMLParser):
                 else:
                     return ''
         except:
-            print ('Disconnected!')
+            print ('Not connected!')
 
     def find_last_page(self, url):
         self.last_page = 0
@@ -62,13 +62,14 @@ def craw(url_list, regex_list, output):
     with open(regex_list, 'r') as f:
         regex = f.readlines()
 
-    if urls: 
+    if urls and regex: 
         for url in urls:
             url = url.rstrip().lstrip()
 
             last_page, pages = parser.find_last_page(url)
-
-            print("Total page: ", last_page)
+               
+            if last_page > 0:
+                print("Total page: ", last_page)
 
             page = 0
 
@@ -78,14 +79,13 @@ def craw(url_list, regex_list, output):
 
                 print ("Crawling: ", thread_url)
 
-                if regex:
-                    for r in regex:
-                        r = r.rstrip().lstrip()
-                        links = parser.find_by_regex(r, parser.read_content(thread_url))
-                        if (links):
-                            with open(output, 'a') as f:
-                                for link in links:
-                                    f.write('{} {}'.format(link[1], '\n'))
+                for r in regex:
+                    r = r.rstrip().lstrip()
+                    links = parser.find_by_regex(r, parser.read_content(thread_url))
+                    if (links):
+                        with open(output, 'a') as f:
+                            for link in links:
+                                f.write('{} {}'.format(link[1], '\n'))
 
 if __name__ == "__main__":
     if len(sys.argv) > 3:
